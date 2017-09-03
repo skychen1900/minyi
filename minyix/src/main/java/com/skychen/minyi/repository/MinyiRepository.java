@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MinyiRepository extends JpaRepository<Minyi, Integer> {
 
-  @Query("select a from Actor a where a.name like %:keyword% order by a.id asc")
-  List<Minyi> findActors(@Param("keyword") String keyword);
+  @Query("select a from Minyi a where a.title like %:keyword% order by a.id asc")
+  List<Minyi> findMinyis(@Param("keyword") String keyword);
 
 }

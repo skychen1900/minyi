@@ -20,25 +20,25 @@ public class ScheduledTasks {
 
   @Scheduled(fixedRate = 10000)
   public void reportCurrentTime() {
-    System.out.println("Rate " + sdf.format(new Date()));
+//    System.out.println("Rate " + sdf.format(new Date()));
     try { TimeUnit.SECONDS.sleep(2L); } catch (InterruptedException e) { e.printStackTrace(); }
   }
 
   @Scheduled(initialDelay = 15000, fixedDelay = 10000)
   public void report() {
-    System.out.println("Delay " + sdf.format(new Date()));
+//    System.out.println("Delay " + sdf.format(new Date()));
     try { TimeUnit.SECONDS.sleep(2L); } catch (InterruptedException e) { e.printStackTrace(); }
   }
 
   @Scheduled(cron = "*/5 * * * * MON-FRI", zone= "Asia/Tokyo")
   public void cron() {
-    System.out.println("Cron " + sdf.format(new Date()));
+//    System.out.println("Cron " + sdf.format(new Date()));
     try { TimeUnit.SECONDS.sleep(2L); } catch (InterruptedException e) { e.printStackTrace(); }
   }
 
   @Scheduled(cron = "${cron.cron2}")
   public void cron2() {
-    System.out.println("Cron2 " + sdf.format(new Date()));
+//    System.out.println("Cron2 " + sdf.format(new Date()));
     try { TimeUnit.SECONDS.sleep(2L); } catch (InterruptedException e) { e.printStackTrace(); }
   }
 

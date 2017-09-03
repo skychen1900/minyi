@@ -7,16 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.sql.Time;
-import java.util.Date;
-import java.sql.Timestamp;
-
 /**
  * The persistent class for the minyi database table.
  * 
  */
 @Entity
-@Table(name="Minyi")
+@Table(name="main")
 public class Minyi {
 	
 	@Id
@@ -24,146 +20,71 @@ public class Minyi {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
+	@Column(name="cdate")
+	private String cdate;
+	
+	@Column(name="ctime")
+	private String ctime;
+	
+	@Column(name="status")
+	private String status;
+	
+	@Column(name="title")
+	private String title;
+	
+	@Column(name="author")
 	private String author;
 
-	private Date CDate;
-
+	@Column(name="content")
 	private String content;
+	
+	@Column(name="replycontent")
+	private String replycontent;
+	
+	@Column(name="replybumen")
+	private String replybumen;
 
-	private Time CTime;
+	@Column(name="replydate")
+	private String replydate;
 
+	@Column(name="replytime")
+	private String replytime;
+
+	@Column(name="href")
 	private String href;
-
-	private Date MDate;
-
-	private int minyiID;
-
-	private Time MTime;
-
-	private String replyBumen;
-
-	private String replyContent;
-
-	private Date replyDate;
-
-	private Time replyTime;
-
-	private String status;
-
-	private String title;
-
-	@Column(name="update_at")
-	private Timestamp updateAt;
-
-	public Minyi() {
-	}
+	
+	@Column(name="mdate")
+	private String mdate;
+	
+	@Column(name="mtime")
+	private String mtime;
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getAuthor() {
-		return this.author;
+	public String getCdate() {
+		return cdate;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setCdate(String cdate) {
+		this.cdate = cdate;
 	}
 
-	public Date getCDate() {
-		return this.CDate;
+	public String getCtime() {
+		return ctime;
 	}
 
-	public void setCDate(Date CDate) {
-		this.CDate = CDate;
-	}
-
-	public String getContent() {
-		return this.content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Time getCTime() {
-		return this.CTime;
-	}
-
-	public void setCTime(Time CTime) {
-		this.CTime = CTime;
-	}
-
-	public String getHref() {
-		return this.href;
-	}
-
-	public void setHref(String href) {
-		this.href = href;
-	}
-
-	public Date getMDate() {
-		return this.MDate;
-	}
-
-	public void setMDate(Date MDate) {
-		this.MDate = MDate;
-	}
-
-	public int getMinyiID() {
-		return this.minyiID;
-	}
-
-	public void setMinyiID(int minyiID) {
-		this.minyiID = minyiID;
-	}
-
-	public Time getMTime() {
-		return this.MTime;
-	}
-
-	public void setMTime(Time MTime) {
-		this.MTime = MTime;
-	}
-
-	public String getReplyBumen() {
-		return this.replyBumen;
-	}
-
-	public void setReplyBumen(String replyBumen) {
-		this.replyBumen = replyBumen;
-	}
-
-	public String getReplyContent() {
-		return this.replyContent;
-	}
-
-	public void setReplyContent(String replyContent) {
-		this.replyContent = replyContent;
-	}
-
-	public Date getReplyDate() {
-		return this.replyDate;
-	}
-
-	public void setReplyDate(Date replyDate) {
-		this.replyDate = replyDate;
-	}
-
-	public Time getReplyTime() {
-		return this.replyTime;
-	}
-
-	public void setReplyTime(Time replyTime) {
-		this.replyTime = replyTime;
+	public void setCtime(String ctime) {
+		this.ctime = ctime;
 	}
 
 	public String getStatus() {
-		return this.status;
+		return status;
 	}
 
 	public void setStatus(String status) {
@@ -171,19 +92,83 @@ public class Minyi {
 	}
 
 	public String getTitle() {
-		return this.title;
+		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public Timestamp getUpdateAt() {
-		return this.updateAt;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setUpdateAt(Timestamp updateAt) {
-		this.updateAt = updateAt;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getReplycontent() {
+		return replycontent;
+	}
+
+	public void setReplycontent(String replycontent) {
+		this.replycontent = replycontent;
+	}
+
+	public String getReplybumen() {
+		return replybumen;
+	}
+
+	public void setReplybumen(String replybumen) {
+		this.replybumen = replybumen;
+	}
+
+	public String getReplydate() {
+		return replydate;
+	}
+
+	public void setReplydate(String replydate) {
+		this.replydate = replydate;
+	}
+
+	public String getReplytime() {
+		return replytime;
+	}
+
+	public void setReplytime(String replytime) {
+		this.replytime = replytime;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public String getMdate() {
+		return mdate;
+	}
+
+	public void setMdate(String mdate) {
+		this.mdate = mdate;
+	}
+
+	public String getMtime() {
+		return mtime;
+	}
+
+	public void setMtime(String mtime) {
+		this.mtime = mtime;
+	}
+	
 }
