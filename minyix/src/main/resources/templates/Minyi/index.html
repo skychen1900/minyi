@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('民意网')">
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 th:utext="#{minyi.index.title}">minyi.index.title</h1>
+      <p th:if="${emptyMessage}" th:text="${emptyMessage}">empty message</p>
+      <p th:if="${errorMessage}" th:text="${errorMessage}">error message</p>
+      <p th:if="${deleteMessage}" th:text="${deleteMessage}">delete message</p>
+    </div>
+
+    <div th:replace="_temp :: nav"></div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <form action="/minyi/search" th:action="@{/minyi/search}" method="get">
+          <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="Search for..." />
+            <span class="input-group-btn">
+              <input class="btn btn-default" type="submit" value="Search!" />
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th th:utext="#{minyi.no}">序号</th>
+              <th th:utext="#{minyi.title}">标题</th>
+              <th th:utext="#{minyi.author}">发布者</th>
+              <th th:utext="#{minyi.status}">状态</th>
+              <th th:utext="#{minyi.cdate}">日期</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item,iterStat : ${list}">
+              <td>
+                <a class="btn btn-default" href="/minyi/${item.id}" th:href="@{/minyi/{id}(id=${item.id})}" 
+                   th:text="(${page.number} - 1) * ${page.MAX_PAGE_ITEM_DISPLAY} + ${iterStat.count}">1</a>
+              </td>
+              <td th:text="${item.title}">2</td>
+              <td th:text="${item.author}">2</td>
+              <td th:text="${item.status}">3</td>
+              <td th:text="${#dates.format(item.cdate,'yyyy/MM/dd HH:mm')}">4</td>
+              <td>
+                <a class="btn btn-warning" href="/minyi/delete/${item.minyiid}" 
+                   th:href="@{/minyi/delete/{id}(id=${item.minyiid})}">delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div th:fragment='paginationbar'>
+            <ul class='pagination pagination-centered'>
+                <li th:class="${page.firstPage}?'disabled':''" style="display:inline">
+                    <span th:if='${page.firstPage}'>←先頭</span>
+                    <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>←先頭</a>
+                </li>
+                <li th:class="${page.hasPreviousPage}? '' : 'disabled'" style="display:inline">
+                    <span th:if='${not page.hasPreviousPage}'>«</span>
+                    <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'>«</a>
+                </li>
+
+                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''" style="display:inline">
+                    <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                    <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'>
+                    <span th:text='${item.number}'>1</span>
+                    </a>
+                </li>
+                <li th:class="${page.hasNextPage}? '' : 'disabled'" style="display:inline">
+                    <span th:if='${not page.hasNextPage}'>»</span>
+                    <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}'>»</a>
+                </li>
+                <li th:class="${page.lastPage}? 'disabled' : ''" style="display:inline">
+                    <span th:if='${page.lastPage}'>末尾➝</span>
+                    <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>末尾➝</a>
+                </li>
+            </ul>
+        </div>
+        
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>

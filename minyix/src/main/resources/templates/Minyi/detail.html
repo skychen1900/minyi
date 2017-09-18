@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_temp :: header ('MINYI DETAIL')">
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 th:utext="#{minyi.detail.title}">minyi.detail.title</h1>
+    </div>
+
+    <div th:replace="_temp :: nav"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table" th:object="${minyi}">
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.title}">birthday</th>
+            <td class="col-md-9" th:text="*{title}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.author}">birthday</th>
+            <td class="col-md-9" th:text="*{author}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.cdate}">name</th>
+            <td class="col-md-9" th:text="*{#dates.format(cdate,'yyyy/MM/dd HH:mm')}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.status}">blood</th>
+            <td class="col-md-9" th:text="*{status}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.content}">birthday</th>
+            <td class="col-md-9" th:text="*{content}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.replycontent}">birthday</th>
+            <td class="col-md-9" th:text="*{replycontent}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.replybumen}">birthday</th>
+            <td class="col-md-9" th:text="*{replybumen}"></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.replydate}">birthday</th>
+           	<td class="col-md-9" th:if="*{replydate} neq 0 " th:text="*{replydate} "></td>
+           	<td class="col-md-9" th:if="*{replydate} eq 0 "></td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.href}">update_at</th>
+            <td class="col-md-9">
+            	<a href="/minyi" target="_blank" th:href="*{href}" th:text="*{href}">href</a>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-md-3 active" th:utext="#{minyi.mdate}">update_at</th>
+            <td class="col-md-9" th:text="*{mdate}"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="_temp :: footer"></div>
+  </div>
+
+  <div th:include="_temp :: script"></div>
+</body>
+</html>
