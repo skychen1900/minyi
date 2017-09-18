@@ -1,5 +1,12 @@
 package com.skychen.minyi.repository;
 
+import org.springframework.stereotype.Component;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,19 +19,21 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="main")
+@Component
+@Table(name="minyi")
 public class Minyi {
 	
 	@Id
 	@Column(name="id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
+	@Column(name="minyiid", nullable=false)
+	@Getter @Setter
+	private int minyiid;	
+
 	@Column(name="cdate")
-	private String cdate;
-	
-	@Column(name="ctime")
-	private String ctime;
+	private Timestamp cdate;
 	
 	@Column(name="status")
 	private String status;
@@ -45,19 +54,13 @@ public class Minyi {
 	private String replybumen;
 
 	@Column(name="replydate")
-	private String replydate;
-
-	@Column(name="replytime")
-	private String replytime;
+	private Timestamp replydate;
 
 	@Column(name="href")
 	private String href;
 	
 	@Column(name="mdate")
-	private String mdate;
-	
-	@Column(name="mtime")
-	private String mtime;
+	private Timestamp mdate;
 
 	public int getId() {
 		return id;
@@ -67,20 +70,12 @@ public class Minyi {
 		this.id = id;
 	}
 
-	public String getCdate() {
+	public Timestamp getCdate() {
 		return cdate;
 	}
 
-	public void setCdate(String cdate) {
+	public void setCdate(Timestamp cdate) {
 		this.cdate = cdate;
-	}
-
-	public String getCtime() {
-		return ctime;
-	}
-
-	public void setCtime(String ctime) {
-		this.ctime = ctime;
 	}
 
 	public String getStatus() {
@@ -131,20 +126,12 @@ public class Minyi {
 		this.replybumen = replybumen;
 	}
 
-	public String getReplydate() {
+	public Timestamp getReplydate() {
 		return replydate;
 	}
 
-	public void setReplydate(String replydate) {
+	public void setReplydate(Timestamp replydate) {
 		this.replydate = replydate;
-	}
-
-	public String getReplytime() {
-		return replytime;
-	}
-
-	public void setReplytime(String replytime) {
-		this.replytime = replytime;
 	}
 
 	public String getHref() {
@@ -155,20 +142,12 @@ public class Minyi {
 		this.href = href;
 	}
 
-	public String getMdate() {
+	public Timestamp getMdate() {
 		return mdate;
 	}
 
-	public void setMdate(String mdate) {
+	public void setMdate(Timestamp mdate) {
 		this.mdate = mdate;
 	}
 
-	public String getMtime() {
-		return mtime;
-	}
-
-	public void setMtime(String mtime) {
-		this.mtime = mtime;
-	}
-	
 }
