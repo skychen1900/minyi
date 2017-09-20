@@ -33,7 +33,6 @@ public class AdviceAction {
 	private String url;
 	
 	@Autowired
-//	@Qualifier("minyiService")
 	MinyiService minyiService;
 	
 	@Autowired
@@ -42,6 +41,7 @@ public class AdviceAction {
 	public void run() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Timestamp timestamp = null;
+		String str = null;
 
 		try {
 			Document document = Jsoup.connect(url).timeout(60 * 1000)
@@ -57,7 +57,10 @@ public class AdviceAction {
 				try {
 					Element ol_x = olIter.next();
 					
-//					Minyi minyi = new Minyi();
+					// id设定
+					minyi.setMinyiid(
+						Integer.parseInt(aElement.attr("href").replaceAll(".*id=([0-9]*)", "$1")));
+					minyi.setId(minyi.getMinyiid());
 
 					// 发布者
 					Elements authorElement = ol_x.select("ul>h5");
@@ -65,14 +68,6 @@ public class AdviceAction {
 
 					// 发布日期
 					Elements timeElement = ol_x.select("ul>li");
-//					minyi.setCdate(
-//						Integer.parseInt(timeElement.text().replaceAll("发表于", "").split(" ")[1]
-//							.replaceAll("-", "")));
-
-					// 发布时间
-//					minyi.setCtime(
-//						Integer.parseInt(timeElement.text().replaceAll("发表于", "").split(" ")[2]
-//							.replaceAll(":", "")));
 					timestamp = new Timestamp(dateFormat.parse(timeElement.text().replaceAll("发表于", "") + ":00").getTime());
 					minyi.setCdate(timestamp);
 
@@ -82,7 +77,10 @@ public class AdviceAction {
 
 					// 发布内容
 					Elements conElement = ol_x.select("dl>p");
-					minyi.setContent(conElement.text().replaceAll("\\[查看全文\\]\\[查看回复\\]", ""));
+					str = conElement.text().replaceAll("查看全文", "")
+							       .replaceAll("查看回复", "")
+							       .replaceAll("\\[\\]", "");
+					minyi.setContent(str);
 
 					// 标题
 					Elements titleElement = ol_x.select("dl>strong>a>h5");
@@ -91,11 +89,6 @@ public class AdviceAction {
 					// link
 					Elements aElement = ol_x.select("dl>strong>a");
 					minyi.setHref(Constant.MINYIURL + aElement.attr("href"));
-
-					// id , minyi id
-					minyi.setMinyiid(
-						Integer.parseInt(aElement.attr("href").replaceAll(".*id=([0-9]*)", "$1")));
-					minyi.setId(minyi.getMinyiid());
 
 					if ("已回复".equals(statusElement.text())) {
 						try {
@@ -106,21 +99,18 @@ public class AdviceAction {
 									+ "Chrome/42.0.2311.152 Safari/537.36")
 								.get();
 
-							Elements olElement2 = document2.select("ol"); // 回复
+							Elements olElement2 = document2.select("ol"); 
 							Element reply = olElement2.get(1);
-							minyi.setReplybumen(reply.select("ul>h5").text()); // 回复部门
-//							minyi.setReplydate(Integer.parseInt(
-//								reply.select("ul>li").text().replaceAll("发表于", "").split(" ")[1]
-//									.replaceAll("-", ""))); // 回复日期
-//							minyi.setReplytime(Integer.parseInt(
-//								reply.select("ul>li").text().replaceAll("发表于", "").split(" ")[2]
-//									.replaceAll(":", ""))); // 回复时间
 							
+							// 回复部门
+							minyi.setReplybumen(reply.select("ul>h5").text());
+
+							// 回复日期
 							timestamp = new Timestamp(dateFormat.parse(reply.select("ul>li").text().replaceAll("发表于", "") + ":00").getTime());
 							minyi.setReplydate(timestamp);
 							
-							replyContent = reply.select("dl>dd").text().replace("<br />",
-								Constant.LF); // 回复内容
+							// 回复内容
+							replyContent = reply.select("dl>dd").text().replace("<br />", Constant.LF);
 							if (replyContent.length() > 1000) {
 								minyi.setReplycontent(replyContent.substring(1, 1000));
 							} else {
@@ -129,16 +119,18 @@ public class AdviceAction {
 						} catch (Exception e) {
 							logger.error("回复内容获取异常 URL={}", minyi.getHref(), e);
 						}
+					} else {
+						//初期化设定
+						minyi.setReplybumen("");
+						minyi.setReplydate(null);
+						minyi.setReplycontent("");
 					}
-
-					// Timestamp
-//					date = new Date();
-//					minyi.setMdate(Integer.parseInt(dateFormat.format(date)));
-//					minyi.setMtime(Integer.parseInt(timeFormat.format(date)));
 					
+					//更新日期设定
 					timestamp = new Timestamp(new java.util.Date().getTime());
 					minyi.setMdate(timestamp);
-
+					
+					//DB更新
 					if (minyiService.count(minyi.getMinyiid()) > 0) {
 						if (minyiService.findOneMinyi(minyi.getMinyiid()).getStatus() == "未回复"
 							&& minyi.getStatus() == "已回复") {
@@ -162,10 +154,10 @@ public class AdviceAction {
 				// 30秒停止
 				Thread.sleep(1000 * 30);
 			} catch (InterruptedException e) {
-				logger.error("未知异常", e);
+				logger.error("未知异常１", e);
 			}
 		} catch (Exception e) {
-			logger.error("未知异常", e);
+			logger.error("未知异常２", e);
 		}
 	}
 
