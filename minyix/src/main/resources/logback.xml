@@ -44,6 +44,11 @@
     <to>skychen1900@gmail.com</to>
     <from>skychen1900@gmail.com</from>
     <subject>Logback SMTPAppender Sample</subject>
+    
+    <!-- ★キャッシュサイズを変更 -->
+    <cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+      <bufferSize>10</bufferSize>
+    </cyclicBufferTracker>
 
     <layout class="ch.qos.logback.classic.PatternLayout">
       <pattern>%m%n</pattern>
