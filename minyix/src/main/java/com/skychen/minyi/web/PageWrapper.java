@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PageWrapper<T> {
-    public static final int MAX_PAGE_ITEM_DISPLAY = 30;
+    public static final int MAX_PAGE_ITEM_DISPLAY = 20;
     private Page<T> page;
     private List<PageItem> items;
     private int currentNumber;
