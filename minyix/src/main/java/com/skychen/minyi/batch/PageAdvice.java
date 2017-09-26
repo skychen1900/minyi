@@ -21,16 +21,20 @@ public class PageAdvice {
 
 	final static Logger logger = LoggerFactory.getLogger(MinyiController.class);
 
-	@Getter
-	@Setter
+	@Getter @Setter
 	private String today;
 
-	@Getter
-	@Setter
+	@Getter @Setter
 	private String yesterday;
 
 	@Autowired
 	AdviceAction adviceAction;
+	
+	@Autowired
+	Minfo minfo;
+	
+	@Autowired
+	Minyi minyi;
 
 	public void exec() {
 
@@ -45,6 +49,15 @@ public class PageAdvice {
 		if (pagesNum > 0) {
 			getAdvices(pagesNum, urlDate);
 		}
+		
+		// 【Minfo DB】にレコードを更新
+		// todo
+		minfo.setTotalnum(minyi.getTotalNum);
+		minfo.setDoingnum();
+		minfo.setCompletenum();
+		minfo.setNewgetdate();
+		minfo.setTodayadvicenum();
+		minfo.setTodaycompletenum();
 
 	}
 
