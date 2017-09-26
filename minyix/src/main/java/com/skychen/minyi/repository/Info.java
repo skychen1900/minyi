@@ -26,31 +26,31 @@ public class Minyi {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-  @Getter @Setter
+        @Getter @Setter
 	private int id;
 
 	@Column(name="totalnum")
-  @Getter @Setter
+        @Getter @Setter
 	private Integer totalnum;
   
 	@Column(name="doingnum")
-  @Getter @Setter
+        @Getter @Setter
 	private Integer doingnum;  
    
 	@Column(name="completenum")
-  @Getter @Setter
+        @Getter @Setter
 	private Integer completenum;
 
 	@Column(name="newgetdate")
-  @Getter @Setter
+        @Getter @Setter
 	private Timestamp newgetdate;
   
 	@Column(name="todayadvicenum")
-  @Getter @Setter
+        @Getter @Setter
 	private Integer todayadvicenum;
   
 	@Column(name="todaycompletenum")
-  @Getter @Setter
+        @Getter @Setter
 	private Integer todaycompletenum;
   
 }
