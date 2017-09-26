@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MinfoRepository extends JpaRepository<Minyi, Integer> {
+public interface MinfoRepository extends JpaRepository<Minfo, Integer> {
   
-  @Query("select a from Minfo a order by a.id desc")
-  public Page<Minyi> findAll(Pageable pageable);
+  @Query("select a from Minfo a order by a.id desc limit 0,0")
+  public Minfo findLastestMinfo();
 
 }
