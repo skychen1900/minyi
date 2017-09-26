@@ -22,5 +22,11 @@ public interface MinyiRepository extends JpaRepository<Minyi, Integer> {
 
   @Query("select a from Minyi a where a.minyiid = ?1 group by a.minyiid")
   public Minyi findOneMinyi(Integer minyiid);
+  
+  @Query("select a from Minyi a where a.status = ?1")
+  public Minyi getStatusNum(String status);
+  
+  @Query("select a from Minyi a where a.status = ?1 and a.cdate =?2")
+  public Minyi getStatusDateNum(String status, Timestamp timestamp);
 
 }
