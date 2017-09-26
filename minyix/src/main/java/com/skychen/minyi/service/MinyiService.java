@@ -38,4 +38,11 @@ public class MinyiService {
 		return minyiRepo.countId(id);
 	}
 	
+	public Integer statusNum(String status){
+		return minyiRepo.getStatusNum(status);
+	}
+	
+	public Integer statusDateNum(String status, Timestamp t){
+		return minyiRepo.getStatusDateNum(status, t);
+	}
 }
