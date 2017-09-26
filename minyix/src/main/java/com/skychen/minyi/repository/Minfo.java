@@ -20,8 +20,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Component
-@Table(name="minyi")
-public class Minyi {
+@Table(name="minfo")
+public class Minfo {
 	
 	@Id
 	@Column(name="id")
