@@ -14,8 +14,8 @@
 
     <div th:fragment="nav" class="row">
       <div class="col-md-12">
-        <ul class="nav nav-pills">
-          <li role="presentation"><a href="/minyi" th:href="@{/minyi}" th:utext="#{minyi.nav.index}">index</a></li>
+        <ul class="nav nav-tabs">
+          <li class="active" role="presentation"><a href="/minyi" th:href="@{/minyi}" th:utext="#{minyi.nav.index}">index</a></li>
           <li role="presentation"><a href="/minyi/create" th:href="@{/minyi/create}" th:utext="#{minyi.nav.create}">create</a></li>
         </ul>
       </div>
